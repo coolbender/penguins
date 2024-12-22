@@ -29,13 +29,12 @@ def predict_single(penguin, vectorizer, scaler, model):
 def predict_lr():
     with open('models/lr.pck', 'rb') as f:
         dv,sc, model = pickle.load(f)
-    penguin = request.get_json()
-    
+    penguin = request.get_json()    
     penguin_target, prediction = predict_single(penguin, dv, sc, model)
 
     result = {
-        'penguin': int(penguin_target),
-        'penguin_probability': float(prediction)
+        'penguin (Adelie: 0 | Chinstrap: 1 | Gentoo: 2)': int(penguin_target),
+        'penguin_probability (%)': round(float(prediction)*100, 2)
     }
 
     return jsonify(result)
@@ -45,12 +44,11 @@ def predict_svm():
     with open('models/svm.pck', 'rb') as f:
         dv,sc, model = pickle.load(f)
     penguin = request.get_json()
-    print(penguin)
-    penguin, prediction = predict_single(penguin, dv, sc, model)
+    penguin_target, prediction = predict_single(penguin, dv, sc, model)
 
     result = {
-        'penguin': int(penguin),
-        'penguin_probability': float(prediction)
+        'penguin (Adelie: 0 | Chinstrap: 1 | Gentoo: 2)': int(penguin_target),
+        'penguin_probability (%)': round(float(prediction)*100, 2)
     }
 
     return jsonify(result)
@@ -60,12 +58,11 @@ def predict_dt():
     with open('models/dt.pck', 'rb') as f:
         dv,sc, model = pickle.load(f)
     penguin = request.get_json()
-    print(penguin)
-    penguin, prediction = predict_single(penguin, dv, sc, model)
+    penguin_target, prediction = predict_single(penguin, dv, sc, model)
 
     result = {
-        'penguin': int(penguin),
-        'penguin_probability': float(prediction)
+        'penguin (Adelie: 0 | Chinstrap: 1 | Gentoo: 2)': int(penguin_target),
+        'penguin_probability (%)': round(float(prediction)*100, 2)
     }
 
     return jsonify(result)
@@ -77,11 +74,11 @@ def predict_knn():
         dv,sc, model = pickle.load(f)
     penguin = request.get_json()
     print(penguin)
-    penguin, prediction = predict_single(penguin, dv, sc, model)
+    penguin_target, prediction = predict_single(penguin, dv, sc, model)
 
     result = {
-        'penguin': int(penguin),
-        'penguin_probability': float(prediction)
+        'penguin (Adelie: 0 | Chinstrap: 1 | Gentoo: 2)': int(penguin_target),
+        'penguin_probability (%)': round(float(prediction)*100, 2)
     }
 
     return jsonify(result)

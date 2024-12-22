@@ -21,7 +21,7 @@ def call_api(island, sex, bill_length_mm, bill_depth_mm, flipper_length_mm, body
         print(f"Error de conexión: {e}")
 
 def main(island, sex, bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g, endpoint):
-    print("\nEjecutando solicitud POST...")
+    print(f"\nEjecutando solicitud POST... {endpoint}")
     call_api(island, sex, bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g, endpoint)
 
 if __name__ == "__main__":
