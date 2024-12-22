@@ -27,10 +27,10 @@ from sklearn.preprocessing import StandardScaler
 sc = StandardScaler()
 sc.fit(X_train[numerical])
 
-X_train_num = sc.transform(X_train[numerical])
+X_train_std = sc.transform(X_train[numerical])
 
 import numpy as np
-X_train = np.hstack([X_train_cat, X_train_num])
+X_train = np.hstack([X_train_cat, X_train_std])
 
 from sklearn.linear_model import LogisticRegression
 lr = LogisticRegression(solver='liblinear')
