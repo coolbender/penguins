@@ -41,22 +41,11 @@ if __name__ == "__main__":
     main(island, sex, bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g, endpoint)
 
 """
-curl --request POST "http://127.0.0.1:8000/predict" \
---header "Content-Type: application/json" \
---data-raw "{\
-    \"island\": \"Torgersen\",\
-    \"sex\": \"FEMALE\",\
-    \"bill_length_mm\": 39.1,\
-    \"bill_depth_mm\": 18.7,\
-    \"flipper_length_mm\": 181.0,\
-    \"body_mass_g\": 3800.0\
-}"
-
+poetry run python client.py "Torgersen" "male" 39.1 18.7 181.0 3750.0 predict_lr
 
 {
   "penguin": false,
   "penguin_probability": 0.0025385558731211982
 }
-
 
 """
