@@ -9,14 +9,14 @@ df['target'] = df['species'].map({'Adelie': 0, 'Chinstrap': 1, 'Gentoo': 2})
 categorical = ['island', 'sex']
 numerical = ['bill_length_mm', 'bill_depth_mm', 'flipper_length_mm', 'body_mass_g']
 
+X = df
+y = df.target.values
+
+
 from sklearn.model_selection import train_test_split
-df_train_full, df_test = train_test_split(df, test_size=0.2, random_state=1)
-df_train, df_val = train_test_split(df_train_full, test_size=0.33, random_state=1)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=1)
 
-y_train = df_train.target.values
-y_val = df_val.target.values
-
-train_dict = df_train[categorical + numerical].to_dict(orient='records')
+train_dict = X_train[categorical + numerical].to_dict(orient='records')
 
 from sklearn.feature_extraction import DictVectorizer
 dv = DictVectorizer(sparse=False)
@@ -25,9 +25,9 @@ X_train_cat = dv.transform(train_dict)
 
 from sklearn.preprocessing import StandardScaler
 sc = StandardScaler()
-sc.fit(df_train[numerical])
+sc.fit(X_train[numerical])
 
-X_train_num = sc.transform(df_train[numerical])
+X_train_num = sc.transform(X_train[numerical])
 
 import numpy as np
 X_train = np.hstack([X_train_cat, X_train_num])
