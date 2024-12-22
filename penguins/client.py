@@ -44,7 +44,7 @@ if __name__ == "__main__":
 poetry run python client.py "Torgersen" "male" 39.1 18.7 181.0 3750.0 predict_lr
 
 {
-  "penguin": false,
+  "penguin": 0,
   "penguin_probability": 0.0025385558731211982
 }
 
