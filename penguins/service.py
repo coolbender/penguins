@@ -1,6 +1,7 @@
 import pickle
 import numpy as np
 from flask import Flask, jsonify, request
+import pandas as pd
 
 app = Flask('penguin-predict')
 
@@ -8,19 +9,19 @@ def predict_single(penguin, vectorizer, scaler, model):
     penguin_categoricas = vectorizer.transform([{
         'island': penguin['island'],
         'sex': penguin['sex']
-    }])    
+    }]) 
 
-    penguin_numericas = scaler.transform([[
+    penguin_numericas_df = pd.DataFrame([[
         penguin['bill_length_mm'],
         penguin['bill_depth_mm'],
         penguin['flipper_length_mm'],
         penguin['body_mass_g']
-    ]])    
+    ]], columns=['bill_length_mm', 'bill_depth_mm', 'flipper_length_mm', 'body_mass_g'])    
 
-    penguin_full = np.hstack([penguin_categoricas, penguin_numericas])
-    
-    y_pred = model.predict(penguin_full)[0]
-    y_prob = model.predict_proba(penguin_full)[0][y_pred]
+    penguin_numericas = scaler.transform(penguin_numericas_df)
+    penguin_completo = np.hstack([penguin_categoricas, penguin_numericas])  
+    y_pred = model.predict(penguin_completo)[0]
+    y_prob = model.predict_proba(penguin_completo)[0][y_pred]
     return (y_pred, y_prob)
 
 
