@@ -30,11 +30,11 @@ def predict_lr():
     with open('models/lr.pck', 'rb') as f:
         dv,sc, model = pickle.load(f)
     penguin = request.get_json()
-    print(penguin)
-    penguin, prediction = predict_single(penguin, dv, sc, model)
+    
+    penguin_target, prediction = predict_single(penguin, dv, sc, model)
 
     result = {
-        'penguin': bool(penguin),
+        'penguin': int(penguin_target),
         'penguin_probability': float(prediction)
     }
 
@@ -49,7 +49,7 @@ def predict_svm():
     penguin, prediction = predict_single(penguin, dv, sc, model)
 
     result = {
-        'penguin': bool(penguin),
+        'penguin': int(penguin),
         'penguin_probability': float(prediction)
     }
 
@@ -64,7 +64,7 @@ def predict_dt():
     penguin, prediction = predict_single(penguin, dv, sc, model)
 
     result = {
-        'penguin': bool(penguin),
+        'penguin': int(penguin),
         'penguin_probability': float(prediction)
     }
 
@@ -80,7 +80,7 @@ def predict_knn():
     penguin, prediction = predict_single(penguin, dv, sc, model)
 
     result = {
-        'penguin': bool(penguin),
+        'penguin': int(penguin),
         'penguin_probability': float(prediction)
     }
 

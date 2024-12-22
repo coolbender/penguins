@@ -38,15 +38,15 @@ lr.fit(X_train, y_train)
 
 from sklearn.svm import SVC
 svm = SVC(kernel='linear',C=1.0, random_state=1, probability=True)
-svm.fit(X_train_cat, y_train)
+svm.fit(X_train, y_train)
 
 from sklearn.tree import DecisionTreeClassifier
 dt = DecisionTreeClassifier(criterion='gini',max_depth=4, random_state=1)
-dt.fit(X_train_cat,y_train)
+dt.fit(X_train,y_train)
 
 from sklearn.neighbors import KNeighborsClassifier
 knn = KNeighborsClassifier(n_neighbors=3, p=2, metric='minkowski')
-knn.fit(X_train_cat, y_train)
+knn.fit(X_train, y_train)
 
 
 import pickle
