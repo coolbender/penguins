@@ -44,8 +44,9 @@ if __name__ == "__main__":
 poetry run python client.py "Torgersen" "male" 39.1 18.7 181.0 3750.0 predict_lr
 
 {
-        'penguin (Adelie: 0 | Chinstrap: 1 | Gentoo: 2)': int(penguin_target),
-        'penguin_probability (%)': round(float(prediction)*100, 2)
+  "penguin (Adelie: 0 | Chinstrap: 1 | Gentoo: 2)": 1,
+  "penguin_probability (%)": 50.23
+
 }
 
 """
