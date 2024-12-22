@@ -5,24 +5,24 @@ from flask import Flask, jsonify, request
 app = Flask('penguin-predict')
 
 def predict_single(penguin, vectorizer, scaler, model):
-   penguin_categoricas = vectorizer.transform([{
-   	'island': penguin['island'],
-   	'sex': penguin['sex']
-   }])
+    penguin_categoricas = vectorizer.transform([{
+        'island': penguin['island'],
+        'sex': penguin['sex']
+    }])    
 
-   penguin_sdt = scaler.transform([[
-   	penguin['bill_length_mm'],
-   	penguin['bill_depth_mm'],
-   	penguin['flipper_length_mm'],
-   	penguin['body_mass_g']
-   ]])
+    penguin_numericas = scaler.transform([[
+        penguin['bill_length_mm'],
+        penguin['bill_depth_mm'],
+        penguin['flipper_length_mm'],
+        penguin['body_mass_g']
+    ]])    
 
-   print("service categorias:",penguin_categoricas)
-   print("service numeros:", penguin_sdt)   
+    penguin_full = np.hstack([penguin_categoricas, penguin_numericas])
+    
+    y_pred = model.predict(penguin_full)[0]
+    y_prob = model.predict_proba(penguin_full)[0][y_pred]
+    return (y_pred, y_prob)
 
-   y_pred = model.predict(penguin_sdt)[0]
-   y_prob = model.predict_proba(penguin_sdt)[0][y_pred]
-   return (y_pred, y_prob)
 
 @app.route('/predict_lr', methods=['POST'])
 def predict_lr():
